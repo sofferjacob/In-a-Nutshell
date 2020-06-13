@@ -200,3 +200,82 @@ if (!a === true) {
   console.log('Success');
 }
 ```
+## Loops
+A `while` loop executes until a specified condition evaluates to false. It can be created using the following syntax:
+```js
+while (condition) {
+  // do something
+}
+```
+A `for` loop is similar to a `while` loop, it has a different syntax which allows you to declare an initial expression and an increment expression:
+```js
+for (initial condition; condition; increment) {
+  // do something
+}
+```
+For example:
+```js
+let arr = [1, 2, 3];
+for (let i = 0; i < arr.length; i++) {
+  console.log(arr[i]);
+}
+// Output: 1  2  3
+```
+A `do while` loop is the same as a `while` loop, except it executes the code block first and evaluates the condition after, this way the code block will be executed at least once.
+```js
+do {
+  // do something
+} while (condition);
+```
+A `for in` loop allows us to easily loop through enumerable properties of objects. JavaScript will execute the code block for each member of the object. This kind of loop should not be used to iterate through arrays.
+```js
+for (variableName in object) {
+  // do something
+  // you can access the current member
+  // using the variable defined in the loop
+}
+```
+A `for of` loop is similar to the `for in` loop, except it allows us to iterate through arrays and other iterable objects.
+
+```js
+for (variableName of object) {
+  // do something
+  // you can access the current member
+  // using the variable defined in the loop
+}
+```
+For example:
+```js
+let arr = [1, 2, 3, 4];
+for (i of arr) {
+  console.log(i);
+}
+// Output: 1 2 3 4
+
+## Functions
+Traditionally functions are defined using the following syntax:
+```js
+function functionName(arguments) {
+  function body
+  return statement;
+}
+```
+Example:
+```js
+function sum(a, b) {
+  let result = a + b;
+  return result;
+```
+You can use the property `arguments.length` to get the number of arguments passed to the function.
+ES6 introduced arrow functions, which have a different syntax, and allows us to create anonymous and single line functions:
+```js
+const sum = (a, b) => a + b;  // The "function body" goes after the arrow. The return keyword isn't necessary
+                              // and the parenthesis can be ommited if only 1 argument is being used.
+// Function with a body
+const logNTimes = (str, n) => {
+  for (let i = 0; i < n; i++) {
+    console.log(str);
+  }
+```
+## Objects
+                              
