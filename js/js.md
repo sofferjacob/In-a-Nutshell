@@ -251,7 +251,7 @@ for (i of arr) {
   console.log(i);
 }
 // Output: 1 2 3 4
-
+```
 ## Functions
 Traditionally functions are defined using the following syntax:
 ```js
