@@ -247,7 +247,7 @@ for (variableName of object) {
 For example:
 ```js
 let arr = [1, 2, 3, 4];
-for (i of arr) {
+for (let i of arr) {
   console.log(i);
 }
 // Output: 1 2 3 4
