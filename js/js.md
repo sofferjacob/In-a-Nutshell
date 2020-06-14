@@ -1,15 +1,15 @@
-# JavaScript Crash Course
+# JavaScript In a Nutshell
 Note: this crash course uses some ES6 syntax and features.
 ## Index
-* Data types
-* Variables
-* Operators
-* Arrays
-* Logic
-* Loops
-* Functions
-* Objects
-* Classes
+* [Data types](#data-types)
+* [Variables](#variables)
+* [Operators](#operators)
+* [Arrays](#arrays)
+* [Logic](#logic)
+* [Loops](#loops)
+* [Functions](#functions)
+* [Objects](#objects)
+* [Classes](#classes)
 ## Data types
 Java script supports the following data types:
 * Undefined: This value is used in undefined variables.
@@ -278,4 +278,139 @@ const logNTimes = (str, n) => {
   }
 ```
 ## Objects
-                              
+Objects are key-value mappings in JavaScript. They can contain any data type, including functions and other objects, and can be used in place of classes to write Object Oriented code. An object can be defined using the following syntax:
+```js
+let [object name] = {
+  property: value
+}
+```
+For example:
+```js
+let person = {
+  name: 'John',
+  surname: 'Doe',
+  age: 23,
+  greet: () => console.log('Hi!')
+}
+```
+You can access the properties of an object in two ways:
+```js
+console.log(person.name);  // Output: John
+console.log(person['surname']); // Note that the property name must be passed as a string
+// Outut: Doe
+```
+The bracket access method is mandatory when accessing properties with a space in their name and useful when you don't know which property you will access in advance, since you can use a string variable in the brackets:
+```js
+let propertyName = 'age';
+console.log(person[propertyName]);  // Output: 23
+```
+You can add properties to an object using the following syntax:
+```js
+person.newProperty = 'I am a new property';
+```
+### Constructors and prototypes
+You can use a constructor and prototypes to create new objects from a template, allowing us to use objects as classes. Constructors are functions that create new objects. They can take arguments and create your object's properties. The following is an example of a constructor:
+```js
+// Capitalize the first letter of the constructor name
+function Dog(name) {
+  this.name = name;  // The keyword this is used to refer to the instance's copy of the variable
+  this.color = 'blue';
+  this.bark = () => console.log('Woof');
+}
+```
+To create an object using a constructor use the following syntax:
+```js
+let bingo = new Dog('Bingo');  // Note the new keyword
+bingo.bark();                  // Output: Woof
+```
+You can create a private property by defining it as a variable inside the constructor:
+```js
+function Dog(name) {
+  let color = 'blue';
+  this.name = name;  // The keyword this is used to refer to the instance's copy of the variable
+  this.getColor = () => color;
+  this.bark = () => console.log('Woof');
+}
+
+let bingo = new Dog('Bingo');
+bingo.color;  // Error
+bingo.getColor(); // returns blue
+```
+You can check the `constructor` property of an object to see which constructor created it or use the keyword `instanceof`:
+```js
+bingo instanceof Dog;  // Returns true
+```
+To create properties for all instances of a constructor's object we can use properties. Think of them as a template with what the final object should contain, objects inherit their prototype from the constructor that created them, allowing us to avoid repeating code. When modifying an objects prototype the constructor property gets overwirtten, therefore you will need to reset it.
+```js
+Dog.prototype.numberOfLegs = 4;  // Adding a single prototype property to Dog
+// Or add multiple prototype properties:
+Dog.prototype = {
+  constructor: Dog,  // Remember to reset the constructor when modifying the prototype
+  eat: () => console.log('Mmmm'),
+  run: () => console.log('I am running!')
+}
+```
+### Inheritance
+Objects can inherit properties from a supertype. This can be done using the following syntax:
+```js
+function Mammal() {}  // Supertype declaration
+
+Mammal.prototype = {
+  constructor: Mammal,
+  eat: () => console.log('Mmmm'),
+  sayHi: () => console.log('I am a mammal'),
+}
+
+function Dog(name) {
+  let color = 'blue';
+  this.name = name;  // The keyword this is used to refer to the instance's copy of the variable
+  this.getColor = () => color;
+  this.bark = () => console.log('Woof');
+}
+
+Dog.prototype = Object.create(Mammal.prototype);  // We use Object.create to assign Mammal as a supertype to dog
+Dog.prototype.constructor = Dog; // Remember to reset a constructor after inheriting or changing the prototype
+Dog.prototype.run = () => console.log('I am running'); // You can add methods after inheriting (not before or they will be overwritten)
+Dog.prototype.sayHi = () => console.log('Hi I am a dog');  // You can override methods using this syntax
+
+let bingo = new Dog('Bingo');
+bingo.eat();  // Inherited method. Output: Mmmm
+bingo.sayHi();  // Overriden method. Output: Hi I am a dog
+```
+Note that an object will only inherit its supertype's prototype, not properties defined inside its constructor.
+
+### Mixins
+Inheritance is not the only way objects can share properties. Sometimes you want to inherit from more than one supertype or the objects sharing the behavior are unrelated. Here is where mixins come in, they are functions that add properties to any project passed to it. Example:
+```js
+let shark = {
+  name: 'Shark',
+}
+
+let human = {
+  'name': 'George'
+}
+
+const swimMixin = obj => {
+  obj.swim = () => console.log('Swimming');
+}
+
+swimMixin(human);
+swimMixin(shark);
+
+human.swim(); // Output: Swimming
+
+// You can also use mixins for constructor functions by modifying the prototype
+function Fish() {}
+
+const swimPrototypeMixin = obj => {
+  obj.prototype.swim = () => console.log('Swimming');
+}
+
+swimPrototypeMixin(Fish);
+
+let goldfish = new Fish();
+goldfish.swim();  // Output: Swimming
+```
+
+## Classes
+Most features of classes are still experimental and not supported by many browsers. For now objects should be used in their place. A section on classes will be added when there is more widespread support for their use. If you are still intersted in learning about classes I suggest you access the following link: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
