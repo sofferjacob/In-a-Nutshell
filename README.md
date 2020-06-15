@@ -1,4 +1,4 @@
-# In-a-Nutshell
+# In a Nutshell
 
 [![CC BY 4.0][cc-by-image]][cc-by]
 
