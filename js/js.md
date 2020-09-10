@@ -340,7 +340,7 @@ You can check the `constructor` property of an object to see which constructor c
 ```js
 bingo instanceof Dog;  // Returns true
 ```
-To create properties for all instances of a constructor's object we can use properties. Think of them as a template with what the final object should contain, objects inherit their prototype from the constructor that created them, allowing us to avoid repeating code. When modifying an objects prototype the constructor property gets overwirtten, therefore you will need to reset it.
+To create properties for all instances of a constructor's object we can use prototypes. Think of them as a template describing what the final object should contain, objects inherit their prototype from the constructor that created them, allowing us to avoid repeating code. When modifying an objects prototype the constructor property gets overwirtten, therefore you will need to reset it.
 ```js
 Dog.prototype.numberOfLegs = 4;  // Adding a single prototype property to Dog
 // Or add multiple prototype properties:
