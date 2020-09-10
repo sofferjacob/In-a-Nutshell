@@ -3,6 +3,7 @@
 [![CC BY 4.0][cc-by-image]][cc-by]
 
 This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by].
+Code samples are licensed under the MIT license.
 
 Quick crash courses on some programming languages to learn a language quickly or be used as reference.
 
